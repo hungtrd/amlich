@@ -121,7 +121,7 @@ func getLeapMonthOffset(a11 float64, tz int) int {
 	arc := getSunLongitude(getNewMoonDay(k+i, tz), tz)
 	for {
 		last = arc
-		i = i + 1
+		i++
 		newmoon := getNewMoonDay(k+i, tz)
 		arc = getSunLongitude(newmoon, tz)
 
@@ -132,7 +132,11 @@ func getLeapMonthOffset(a11 float64, tz int) int {
 	return i - 1
 }
 
-func Solar2Lunar(dd, mm, yy, tz int) (lunarD, lunarM, lunarY int, lunarLeap bool) {
+// The function Solar2Lunar converts a given Solar date (dd, mm, yy) into
+// the corresponding Lunar date (lunarD, lunarM, lunarY) in the Vietnamese Lunar calendar.
+// It also determines if the given Lunar month is a leap month or not (lunarLeap).
+// The time zone (tz) is used to calculate the date in the Lunar calendar.
+func Solar2Lunar(dd, mm, yy, tz int) (lunarD, lunarM, lunarY, lunarLeap int) {
 	dayNumber := date2JuliusDay(dd, mm, yy)
 	k := floor((i2f(dayNumber) - 2415021.076998695) / 29.530588853)
 	monthStart := getNewMoonDay(k+1, tz)
@@ -150,14 +154,15 @@ func Solar2Lunar(dd, mm, yy, tz int) (lunarD, lunarM, lunarY int, lunarLeap bool
 	}
 	lunarD = dayNumber - monthStart + 1
 	diff := floor((i2f(monthStart) - i2f(a11)) / 29)
-	lunarLeap = false
+
+	lunarLeap = 0
 	lunarM = diff + 11
 	if b11-a11 > 365 {
 		leapMonthDiff := getLeapMonthOffset(i2f(a11), tz)
 		if diff >= leapMonthDiff {
 			lunarM = diff + 10
 			if diff == leapMonthDiff {
-				lunarLeap = false
+				lunarLeap = 1
 			}
 		}
 	}
@@ -171,6 +176,9 @@ func Solar2Lunar(dd, mm, yy, tz int) (lunarD, lunarM, lunarY int, lunarLeap bool
 	return
 }
 
+// The function Lunar2Solar converts a given Lunar date (lunarDay, lunarMonth, lunarYear, lunarLeap)
+// in the Vietnamese Lunar calendar into the corresponding Solar date (d, m, y).
+// The time zone (tz) is used to calculate the date in the Solar calendar.
 func Lunar2Solar(lunarDay, lunarMonth, lunarYear, lunarLeap, tz int) (d, m, y int) {
 	var k, a11, b11, off, leapOff, leapMonth, monthStart int
 	if lunarMonth < 11 {
