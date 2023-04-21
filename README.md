@@ -1,4 +1,8 @@
 # amlich
+[![Build Status](https://github.com/hungtrd/amlich/workflows/Go/badge.svg?branch=master)](https://github.com/hungtrd/amlich/actions?query=branch%3Amaster)
+[![Go Report Card](https://goreportcard.com/badge/github.com/hungtrd/amlich)](https://goreportcard.com/report/github.com/hungtrd/amlich)
+[![Sourcegraph](https://sourcegraph.com/github.com/hungtrd/amlich/-/badge.svg)](https://sourcegraph.com/github.com/hungtrd/amlich?badge)
+[![Release](https://img.shields.io/github/release/hungtrd/amlich.svg?style=flat-square)](https://github.com/hungtrd/amlich/releases)
 
 Sử dụng để chuyển đổi từ ngày Dương Lịch sang ngày Âm Lịch và ngược lại
 
