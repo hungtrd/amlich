@@ -73,7 +73,7 @@ func (l *Lunar) ToSolar() Solar {
 
 func (l *Lunar) Weekday() string {
 	jd := date2JuliusDay(l.t.Day(), int(l.t.Month()), l.t.Year())
-	return DaysOfWeek[jd%10]
+	return DaysOfWeek[jd%7]
 }
 
 // TODO: implement function
