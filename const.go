@@ -53,6 +53,38 @@ var (
 		10: {2, 4, 5, 8, 9, 11},
 		11: {1, 4, 6, 7, 10, 11},
 	}
+
+	// [ngày] -> giờ
+	ThoTuHour = map[DiaChi]DiaChi{
+		Ty:   Suu,
+		Suu:  Ngo,
+		Dan:  Ngo,
+		Mao:  Ti,
+		Thin: Ti,
+		Ti:   Ngo,
+		Ngo:  Mui,
+		Mui:  Ngo,
+		Than: Mao,
+		Dau:  Ti,
+		Tuat: Mui,
+		Hoi:  Ngo,
+	}
+
+	// [tháng] -> giờ
+	SatChuHour = map[int]DiaChi{
+		1:  Dan,
+		2:  Ti,
+		3:  Than,
+		4:  Thin,
+		5:  Dau,
+		6:  Mao,
+		7:  Dan,
+		8:  Ti,
+		9:  Than,
+		10: Thin,
+		11: Dau,
+		12: Mao,
+	}
 )
 
 func (c DiaChi) String() string {

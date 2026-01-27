@@ -64,8 +64,8 @@ d, m, y := amlich.Lunar2Solar(lunD, lunM, lunY, leap, tz)
 - [x] Đổi từ ngày dương lịch sang ngày âm lịch và ngược lại
 - [x] Đổi ngày tháng năm ra can chi
 - [x] Tính giờ hoàng đạo trong ngày
-  - [ ] Tính giờ thọ tử  trong ngày
-  - [ ] Tính giờ sát chủ trong ngày
+  - [x] Tính giờ thọ tử  trong ngày
+  - [x] Tính giờ sát chủ trong ngày
 - [ ] Tính ngày hoàng đạo - hắc đạo
 - [ ] Ngày lễ đặc biệt trong lịch âm
 - [ ] Tính tiết khí
