@@ -29,6 +29,14 @@ fmt.Printf("Âm lịch: ngày %s, tháng %s, năm %s\n", l.DayAlias(), l.MonthAl
 solar := lunar.ToSolar()
 fmt.Println(solar.Weekday()) // Thứ Hai
 fmt.Println(solar.String()) // Thứ Hai, ngày 20, tháng 06, năm 2023
+
+// Giờ hoàng đạo
+auspiciousHours := lunar.AuspiciousHours()
+fmt.Println("Giờ hoàng đạo trong ngày:", auspiciousHours)
+
+// Kiểm tra giờ cụ thể có phải giờ hoàng đạo không
+isAuspicious := lunar.IsAuspiciousHour(9) // Kiểm tra giờ 9h
+fmt.Printf("Giờ 9h có phải giờ hoàng đạo: %v\n", isAuspicious)
 ```
 
 ### Sử dụng hàm convert trực tiếp
@@ -55,7 +63,10 @@ d, m, y := amlich.Lunar2Solar(lunD, lunM, lunY, leap, tz)
 
 - [x] Đổi từ ngày dương lịch sang ngày âm lịch và ngược lại
 - [x] Đổi ngày tháng năm ra can chi
-- [ ] Tính giờ hoàng đạo trong ngày
+- [x] Tính giờ hoàng đạo trong ngày
+  - [ ] Tính giờ thọ tử  trong ngày
+  - [ ] Tính giờ sát chủ trong ngày
+- [ ] Tính ngày hoàng đạo - hắc đạo
 - [ ] Ngày lễ đặc biệt trong lịch âm
 - [ ] Tính tiết khí
 

@@ -76,6 +76,33 @@ func (l *Lunar) Weekday() string {
 	return DaysOfWeek[jd%7]
 }
 
+func (l *Lunar) AuspiciousHours() []string {
+	jd := date2JuliusDay(l.t.Day(), int(l.t.Month()), l.t.Year())
+	dayChi := (jd + 1) % 12
+
+	hourIndices := AuspiciousHours[dayChi]
+	hours := make([]string, len(hourIndices))
+	for i, idx := range hourIndices {
+		hours[i] = HourNames[idx]
+	}
+	return hours
+}
+
+func (l *Lunar) IsAuspiciousHour(hour int) bool {
+	jd := date2JuliusDay(l.t.Day(), int(l.t.Month()), l.t.Year())
+	dayChi := (jd + 1) % 12
+
+	hourChi := getHourChi(hour)
+	hourIndices := AuspiciousHours[dayChi]
+
+	for _, idx := range hourIndices {
+		if idx == hourChi {
+			return true
+		}
+	}
+	return false
+}
+
 // TODO: implement function
 func (l *Lunar) Next() *Lunar {
 	return nil

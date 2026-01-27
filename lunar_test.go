@@ -87,3 +87,90 @@ func TestYearAlias(t *testing.T) {
 		})
 	}
 }
+
+func TestAuspiciousHours(t *testing.T) {
+	testCases := []struct {
+		name          string
+		date          time.Time
+		expectedCount int
+	}{
+		{
+			name:          "Test auspicious hours count for 2023-06-20",
+			date:          time.Date(2023, time.June, 20, 0, 0, 0, 0, VietnamLocation()),
+			expectedCount: 6,
+		},
+		{
+			name:          "Test auspicious hours count for 2023-03-23",
+			date:          time.Date(2023, time.March, 23, 0, 0, 0, 0, VietnamLocation()),
+			expectedCount: 6,
+		},
+	}
+
+	for _, tc := range testCases {
+		t.Run(tc.name, func(t *testing.T) {
+			l := New(tc.date)
+			hours := l.AuspiciousHours()
+
+			if len(hours) != tc.expectedCount {
+				t.Errorf("Expected %d auspicious hours, got %d", tc.expectedCount, len(hours))
+			}
+
+			for _, hour := range hours {
+				if hour == "" {
+					t.Errorf("Found empty hour name")
+				}
+			}
+		})
+	}
+}
+
+func TestIsAuspiciousHour(t *testing.T) {
+	testCases := []struct {
+		name     string
+		date     time.Time
+		hour     int
+		expected bool
+	}{
+		{
+			name:     "Test hour 23 (Tý) for 2023-06-20 - auspicious",
+			date:     time.Date(2023, time.June, 20, 0, 0, 0, 0, VietnamLocation()),
+			hour:     23,
+			expected: true,
+		},
+		{
+			name:     "Test hour 2 (Sửu) for 2023-06-20 - not auspicious",
+			date:     time.Date(2023, time.June, 20, 0, 0, 0, 0, VietnamLocation()),
+			hour:     2,
+			expected: false,
+		},
+		{
+			name:     "Test hour 9 (Tỵ) for 2023-06-20 - not auspicious",
+			date:     time.Date(2023, time.June, 20, 0, 0, 0, 0, VietnamLocation()),
+			hour:     9,
+			expected: false,
+		},
+		{
+			name:     "Test hour 15 (Thân) for 2023-06-20 - not auspicious",
+			date:     time.Date(2023, time.June, 20, 0, 0, 0, 0, VietnamLocation()),
+			hour:     15,
+			expected: false,
+		},
+		{
+			name:     "Test hour 17 (Dậu) for 2023-06-20 - auspicious",
+			date:     time.Date(2023, time.June, 20, 0, 0, 0, 0, VietnamLocation()),
+			hour:     17,
+			expected: true,
+		},
+	}
+
+	for _, tc := range testCases {
+		t.Run(tc.name, func(t *testing.T) {
+			l := New(tc.date)
+			result := l.IsAuspiciousHour(tc.hour)
+
+			if result != tc.expected {
+				t.Errorf("Expected IsAuspiciousHour(%d) to be %v, got %v", tc.hour, tc.expected, result)
+			}
+		})
+	}
+}
