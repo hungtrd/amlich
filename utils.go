@@ -67,34 +67,3 @@ func getHourDiaChi(hour int) DiaChi {
 		panic("hour must be in range 0..23")
 	}
 }
-
-func (c DiaChi) String() string {
-	switch c {
-	case Ty:
-		return "Tý"
-	case Suu:
-		return "Sửu"
-	case Dan:
-		return "Dần"
-	case Mao:
-		return "Mão"
-	case Thin:
-		return "Thìn"
-	case Ti:
-		return "Tị"
-	case Ngo:
-		return "Ngọ"
-	case Mui:
-		return "Mùi"
-	case Than:
-		return "Thân"
-	case Dau:
-		return "Dậu"
-	case Tuat:
-		return "Tuất"
-	case Hoi:
-		return "Hợi"
-	default:
-		return "Không hợp lệ"
-	}
-}

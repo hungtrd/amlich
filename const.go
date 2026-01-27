@@ -2,6 +2,22 @@ package amlich
 
 type DiaChi int
 
+const (
+	// 12 địa chi
+	Ty   DiaChi = iota // 0
+	Suu                // 1
+	Dan                // 2
+	Mao                // 3
+	Thin               // 4
+	Ti                 // 5
+	Ngo                // 6
+	Mui                // 7
+	Than               // 8
+	Dau                // 9
+	Tuat               // 10
+	Hoi                // 11
+)
+
 var (
 	Can             = [10]string{"Giáp", "Ất", "Bính", "Đinh", "Mậu", "Kỷ", "Canh", "Tân", "Nhâm", "Quý"}
 	Chi             = [12]string{"Tý", "Sửu", "Dần", "Mão", "Thìn", "Tỵ", "Ngọ", "Mùi", "Thân", "Dậu", "Tuất", "Hợi"}
@@ -39,18 +55,33 @@ var (
 	}
 )
 
-const (
-	// 12 địa chi
-	Ty   DiaChi = iota // 0
-	Suu                // 1
-	Dan                // 2
-	Mao                // 3
-	Thin               // 4
-	Ti                 // 5
-	Ngo                // 6
-	Mui                // 7
-	Than               // 8
-	Dau                // 9
-	Tuat               // 10
-	Hoi                // 11
-)
+func (c DiaChi) String() string {
+	switch c {
+	case Ty:
+		return "Tý"
+	case Suu:
+		return "Sửu"
+	case Dan:
+		return "Dần"
+	case Mao:
+		return "Mão"
+	case Thin:
+		return "Thìn"
+	case Ti:
+		return "Tị"
+	case Ngo:
+		return "Ngọ"
+	case Mui:
+		return "Mùi"
+	case Than:
+		return "Thân"
+	case Dau:
+		return "Dậu"
+	case Tuat:
+		return "Tuất"
+	case Hoi:
+		return "Hợi"
+	default:
+		return "Không hợp lệ"
+	}
+}
