@@ -36,3 +36,34 @@ func VietnamLocation() *time.Location {
 	loc, _ := time.LoadLocation(VietnamTimezone)
 	return loc
 }
+
+func getHourDiaChi(hour int) DiaChi {
+	switch hour {
+	case 23, 0:
+		return Ty
+	case 1, 2:
+		return Suu
+	case 3, 4:
+		return Dan
+	case 5, 6:
+		return Mao
+	case 7, 8:
+		return Thin
+	case 9, 10:
+		return Ti
+	case 11, 12:
+		return Ngo
+	case 13, 14:
+		return Mui
+	case 15, 16:
+		return Than
+	case 17, 18:
+		return Dau
+	case 19, 20:
+		return Tuat
+	case 21, 22:
+		return Hoi
+	default:
+		panic("hour must be in range 0..23")
+	}
+}
