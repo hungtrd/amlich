@@ -76,6 +76,7 @@ func (l *Lunar) Weekday() string {
 	return DaysOfWeek[jd%7]
 }
 
+// AuspiciousHours trả về danh sách các giờ hoàng đạo trong ngày
 func (l *Lunar) AuspiciousHours() []string {
 	jd := date2JuliusDay(l.t.Day(), int(l.t.Month()), l.t.Year())
 	dayChi := (jd + 1) % 12
@@ -88,15 +89,16 @@ func (l *Lunar) AuspiciousHours() []string {
 	return hours
 }
 
+// IsAuspiciousHour kiểm tra xem giờ có phải là giờ hoàng đạo không
 func (l *Lunar) IsAuspiciousHour(hour int) bool {
 	jd := date2JuliusDay(l.t.Day(), int(l.t.Month()), l.t.Year())
 	dayChi := (jd + 1) % 12
 
-	hourChi := getHourChi(hour)
 	hourIndices := AuspiciousHours[dayChi]
 
+	hourChi := getHourDiaChi(hour)
 	for _, idx := range hourIndices {
-		if idx == hourChi {
+		if DiaChi(idx) == hourChi {
 			return true
 		}
 	}

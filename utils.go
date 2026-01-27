@@ -37,39 +37,64 @@ func VietnamLocation() *time.Location {
 	return loc
 }
 
-func getHourChi(hour int) int {
-	if hour >= 23 || hour < 1 {
-		return 0
+func getHourDiaChi(hour int) DiaChi {
+	switch hour {
+	case 23, 0:
+		return Ty
+	case 1, 2:
+		return Suu
+	case 3, 4:
+		return Dan
+	case 5, 6:
+		return Mao
+	case 7, 8:
+		return Thin
+	case 9, 10:
+		return Ti
+	case 11, 12:
+		return Ngo
+	case 13, 14:
+		return Mui
+	case 15, 16:
+		return Than
+	case 17, 18:
+		return Dau
+	case 19, 20:
+		return Tuat
+	case 21, 22:
+		return Hoi
+	default:
+		panic("hour must be in range 0..23")
 	}
-	if hour >= 1 && hour < 3 {
-		return 1
+}
+
+func (c DiaChi) String() string {
+	switch c {
+	case Ty:
+		return "Tý"
+	case Suu:
+		return "Sửu"
+	case Dan:
+		return "Dần"
+	case Mao:
+		return "Mão"
+	case Thin:
+		return "Thìn"
+	case Ti:
+		return "Tị"
+	case Ngo:
+		return "Ngọ"
+	case Mui:
+		return "Mùi"
+	case Than:
+		return "Thân"
+	case Dau:
+		return "Dậu"
+	case Tuat:
+		return "Tuất"
+	case Hoi:
+		return "Hợi"
+	default:
+		return "Không hợp lệ"
 	}
-	if hour >= 3 && hour < 5 {
-		return 2
-	}
-	if hour >= 5 && hour < 7 {
-		return 3
-	}
-	if hour >= 7 && hour < 9 {
-		return 4
-	}
-	if hour >= 9 && hour < 11 {
-		return 5
-	}
-	if hour >= 11 && hour < 13 {
-		return 6
-	}
-	if hour >= 13 && hour < 15 {
-		return 7
-	}
-	if hour >= 15 && hour < 17 {
-		return 8
-	}
-	if hour >= 17 && hour < 19 {
-		return 9
-	}
-	if hour >= 19 && hour < 21 {
-		return 10
-	}
-	return 11
 }

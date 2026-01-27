@@ -1,5 +1,7 @@
 package amlich
 
+type DiaChi int
+
 var (
 	Can             = [10]string{"Giáp", "Ất", "Bính", "Đinh", "Mậu", "Kỷ", "Canh", "Tân", "Nhâm", "Quý"}
 	Chi             = [12]string{"Tý", "Sửu", "Dần", "Mão", "Thìn", "Tỵ", "Ngọ", "Mùi", "Thân", "Dậu", "Tuất", "Hợi"}
@@ -35,4 +37,20 @@ var (
 		10: {2, 4, 5, 8, 9, 11},
 		11: {1, 4, 6, 7, 10, 11},
 	}
+)
+
+const (
+	// 12 địa chi
+	Ty   DiaChi = iota // 0
+	Suu                // 1
+	Dan                // 2
+	Mao                // 3
+	Thin               // 4
+	Ti                 // 5
+	Ngo                // 6
+	Mui                // 7
+	Than               // 8
+	Dau                // 9
+	Tuat               // 10
+	Hoi                // 11
 )
