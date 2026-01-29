@@ -62,6 +62,10 @@ func (l *Lunar) yearChi() string {
 	return Chi[i]
 }
 
+func (l *Lunar) HourAlias() string {
+	return getHourDiaChi(l.t.Hour()).String()
+}
+
 func (l *Lunar) ToSolar() Solar {
 	d, m, y := Lunar2Solar(l.Day, l.Month, l.Year, b2i(l.Leap), getTz(l.t))
 	return Solar{
@@ -82,10 +86,12 @@ func (l *Lunar) AuspiciousHours() []string {
 	dayChi := (jd + 1) % 12
 
 	hourIndices := AuspiciousHours[dayChi]
-	hours := make([]string, len(hourIndices))
-	for i, idx := range hourIndices {
-		hours[i] = HourNames[idx]
+
+	hours := make([]string, 0, len(hourIndices))
+	for _, idx := range hourIndices {
+		hours = append(hours, HourNames[idx])
 	}
+
 	return hours
 }
 
@@ -94,15 +100,46 @@ func (l *Lunar) IsAuspiciousHour(hour int) bool {
 	jd := date2JuliusDay(l.t.Day(), int(l.t.Month()), l.t.Year())
 	dayChi := (jd + 1) % 12
 
-	hourIndices := AuspiciousHours[dayChi]
-
 	hourChi := getHourDiaChi(hour)
+
+	hourIndices := AuspiciousHours[dayChi]
 	for _, idx := range hourIndices {
 		if DiaChi(idx) == hourChi {
 			return true
 		}
 	}
+
 	return false
+}
+
+// ThoTuHour trả về giờ thọ tử của ngày
+func (l *Lunar) ThoTuHour() string {
+	jd := date2JuliusDay(l.t.Day(), int(l.t.Month()), l.t.Year())
+	dayChi := (jd + 1) % 12
+	hourChi := ThoTuHour[DiaChi(dayChi)]
+
+	return hourChi.String()
+}
+
+// IsThoTuHour kiểm tra xem giờ có phải là giờ thọ tử không
+func (l *Lunar) IsThoTuHour(hour int) bool {
+	jd := date2JuliusDay(l.t.Day(), int(l.t.Month()), l.t.Year())
+	dayChi := (jd + 1) % 12
+	hourChi := getHourDiaChi(hour)
+
+	return ThoTuHour[DiaChi(dayChi)] == hourChi
+}
+
+// SatChuHour trả về giờ sát chủ của tháng
+func (l *Lunar) SatChuHour() string {
+	hourChi := SatChuHour[l.Month]
+	return hourChi.String()
+}
+
+// IsSatChuHour kiểm tra xem giờ có phải là giờ sát chủ không
+func (l *Lunar) IsSatChuHour(hour int) bool {
+	hourChi := getHourDiaChi(hour)
+	return SatChuHour[l.Month] == hourChi
 }
 
 // TODO: implement function
